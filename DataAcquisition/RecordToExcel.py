@@ -24,6 +24,7 @@ from time import sleep
 sleep_time = 1 # 获取间隔时间(秒)，防止请求过快被封IP
 uid = "" # 你的UID
 client_id = "" # 你的client_id(cookie)
+target_user_id = "" # 查询的用户的用户名或UID
 range_max = 1 # 最大页数
 
 
@@ -47,7 +48,7 @@ for i in range(1, range_max+1):
     print(f"正在获取第{i}页数据...")
     # 如果文件不存在则调用GetRecordPage.bat获取数据并格式化
     if not os.path.exists(f"./RecordFiles/record{i}_Formatted.json"):
-        os.system(f"GetRecordPage.bat {uid} {client_id} {i} > log.txt")
+        os.system(f"GetRecordPage.bat {uid} {client_id} {target_user_id} {i} > log.txt")
         os.system(f"python FormatJson.py ./RecordFiles/record{i}.json ./RecordFiles/record{i}_Formatted.json")
     # 读取格式化后的json文件
     with open(f"./RecordFiles/record{i}_Formatted.json", 'r', encoding='utf-8') as file:
